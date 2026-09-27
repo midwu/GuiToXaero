@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "guitoxaero",
+  "version": "${version}",
+  "name": "GuiToXaero",
+  "description": "Reads home-listing GUIs (e.g. /homes chest menus) and turns them into a searchable menu plus auto-generated Xaero waypoints.",
+  "authors": ["midwu"],
+  "contact": {
+    "sources": "https://github.com/midwu/GuiToXaero"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/guitoxaero/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "me.midwu.guitoxaero.client.GuitoxaeroDataGenerator"
+    ],
+    "client": [
+      "me.midwu.guitoxaero.client.GuitoxaeroClient"
+    ],
+    "main": [
+      "me.midwu.guitoxaero.Guitoxaero"
+    ]
+  },
+  "mixins": [
+    "guitoxaero.mixins.json",
+    {
+      "config": "guitoxaero.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}",
+    "xaerominimap": "*",
+    "xaeroworldmap": "*"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.midwu.guitoxaero.client.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "AccessorWaypointSet"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
