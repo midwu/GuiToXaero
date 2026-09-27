@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "guitoxaero",
+  "version": "${version}",
+  "name": "GuiToXaero",
+  "description": "This is a mod made by midwu",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/guitoxaero/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "me.midwu.guitoxaero.client.GuitoxaeroDataGenerator"
+    ],
+    "client": [
+      "me.midwu.guitoxaero.client.GuitoxaeroClient"
+    ],
+    "main": [
+      "me.midwu.guitoxaero.Guitoxaero"
+    ]
+  },
+  "mixins": [
+    "guitoxaero.mixins.json",
+    {
+      "config": "guitoxaero.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
