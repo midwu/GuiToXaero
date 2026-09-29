@@ -3,16 +3,15 @@
   "id": "guitoxaero",
   "version": "${version}",
   "name": "GuiToXaero",
-  "description": "This is a mod made by midwu",
-  "authors": [],
+  "description": "Reads home-listing GUIs into a searchable menu and Xaero waypoints.",
+  "authors": [
+    "midwu"
+  ],
   "contact": {},
   "license": "All-Rights-Reserved",
   "icon": "assets/guitoxaero/icon.png",
   "environment": "client",
   "entrypoints": {
-    "fabric-datagen": [
-      "me.midwu.guitoxaero.client.GuitoxaeroDataGenerator"
-    ],
     "client": [
       "me.midwu.guitoxaero.client.GuitoxaeroClient"
     ],
@@ -30,6 +29,11 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "~1.21.11",
+    "java": ">=21"
+  },
+  "recommends": {
+    "xaerominimap": "*",
+    "xaeroworldmap": "*"
   }
 }

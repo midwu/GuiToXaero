@@ -19,3 +19,7 @@ hs_err_pid*
 
 # Common working directory
 run
+
+# Xaero jars are All-Rights-Reserved: compile against them locally, never commit them.
+/libs/*.jar
+!/libs/.gitkeep
