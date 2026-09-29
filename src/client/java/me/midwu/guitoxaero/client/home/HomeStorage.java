@@ -81,6 +81,40 @@ public final class HomeStorage {
         save();
     }
 
+    /** Result of merging one page's freshly-read homes into what's already stored. */
+    public record MergeResult(int added, int updated, int unchanged) {}
+
+    /**
+     * Merges freshly-parsed homes (from one page) into whatever is already stored for this
+     * server, keyed by name (case-insensitive). Existing homes not present in {@code pageHomes}
+     * are left untouched - this never wipes previously captured pages.
+     */
+    public synchronized MergeResult mergeHomes(String serverKey, List<HomeEntry> pageHomes) {
+        LinkedHashMap<String, HomeEntry> byName = new LinkedHashMap<>();
+        for (HomeEntry existing : data.getOrDefault(serverKey, List.of())) {
+            byName.put(existing.name().toLowerCase(Locale.ROOT), existing);
+        }
+
+        int added = 0, updated = 0, unchanged = 0;
+        for (HomeEntry fresh : pageHomes) {
+            String key = fresh.name().toLowerCase(Locale.ROOT);
+            HomeEntry existing = byName.get(key);
+            if (existing == null) {
+                added++;
+            } else if (existing.x() == fresh.x() && existing.y() == fresh.y() && existing.z() == fresh.z()
+                    && existing.dimensionId().equals(fresh.dimensionId())) {
+                unchanged++;
+            } else {
+                updated++;
+            }
+            byName.put(key, fresh);
+        }
+
+        data.put(serverKey, new ArrayList<>(byName.values()));
+        save();
+        return new MergeResult(added, updated, unchanged);
+    }
+
     public synchronized void clear(String serverKey) {
         data.remove(serverKey);
         save();
